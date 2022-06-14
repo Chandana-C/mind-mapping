@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+<style>
+
+.node circle {
+  fill: #999;
+}
+
+.node foreignObject {
+  font: 12.5px sans-serif;
+
+}
+
+.node--internal circle {
+  fill: #555;
+}
+
+.node--internal text {
+  text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+}
+
+.link {
+  fill: none;
+  stroke-opacity: 0.3;
+}
+
+</style>
+</head>
+<body>
+<svg width="1500" height="1000"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="//d3plus.org/js/d3plus.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height"),
+    g = svg.append("g").attr("transform", "translate(" + (width / 2 + 40) + ",400)");
+
+var tree = d3.tree()
+    .size([2 * Math.PI, 350])
+    .separation(function(a, b) { return (a.parent == b.parent ? 1 : 2) / a.depth; });
+//<!-- put JSON in this variable //-->
+var data = {{
+  "name": "26.1 The Rise of Franklin Roosevelt",
+  "children": [
+    {
+      "name": "THE ELECTION OF FRANKLIN ROOSEVELT",
+      "children": [
+        {
+          "name": " Hoover 's popularity",
+          "children": [
+            {
+              "name": " By 1932 presidential election, was at all-time low."
+            }
+          ]
+        },
+        {
+          "name": " Franklin Roosevelt",
+          "children": [
+            {
+              "name": ", though born to wealth and educated at best schools, offered change people sought."
+            },
+            {
+              "name": " However, never wanted to be photographed in Franklin Roosevelt wheelchair or appear infirm in any way, for fear the public 's sympathy would transform into concern over Franklin Roosevelt physical ability to discharge duties of Oval Office."
+            },
+            {
+              "name": " also recognized need to convey to voting public Franklin Roosevelt was not simply another member of political aristocracy."
+            },
+            {
+              "name": " Often, seemed as though Franklin Roosevelt would faint, and aide constantly remained nearby with chair in case Franklin Roosevelt fell."
+            },
+            {
+              "name": " In contrast, thrived on campaign."
+            }
+          ]
+        },
+        {
+          "name": " Hoover",
+          "children": [
+            {
+              "name": " assumed at first Franklin Roosevelt would be easy to defeat, confident Franklin Roosevelt could never carry eastern states and business vote."
+            }
+          ]
+        },
+        {
+          "name": " Many news accounts",
+          "children": [
+            {
+              "name": " reported Franklin Roosevelt seemed physically unwell, with ashen face and shaking hands."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "THE INTERREGNUM",
+      "children": [
+        {
+          "name": " country -- and Hoover --",
+          "children": [
+            {
+              "name": " After landslide election, had to endure interregnum, difficult four months between election and President Roosevelt Congress did not pass single significant piece of legislation during period, although Hoover spent much of time trying to get President Roosevelt to commit publicly to legislative agenda of Hoover 's choosing."
+            }
+          ]
+        },
+        {
+          "name": " Hoover 's inability to further drive",
+          "children": [
+            {
+              "name": " legislative agenda through Congress."
+            }
+          ]
+        },
+        {
+          "name": " President Roosevelt and President Roosevelt driver",
+          "children": [
+            {
+              "name": " immediately rushed Cermak to hospital where Cermak died 19 days later."
+            }
+          ]
+        },
+        {
+          "name": " how to take action on beliefs",
+          "children": [
+            {
+              "name": " But was more in question."
+            }
+          ]
+        },
+        {
+          "name": " we",
+          "children": [
+            {
+              "name": " Save people and nation, and if have to change we minds twice every day to accomplish end, we should do end."
+            }
+          ]
+        },
+        {
+          "name": " Adolph Berle",
+          "children": [
+            {
+              "name": " was mediating influence, who often advised against centrally controlled economy, but did see role the federal government could play in mediating stark cycles of prosperity and depression, if left unchecked, could result in very situation in which country 's presently found country 's."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "INAUGURATION DAY: A NEW BEGINNING",
+      "children": [
+        {
+          "name": " Roosevelt",
+          "children": [
+            {
+              "name": " rode in open car along with outgoing president Hoover, facing public, as Roosevelt made Roosevelt way to U.S. Capitol."
+            }
+          ]
+        },
+        {
+          "name": " Hoover 's mood",
+          "children": [
+            {
+              "name": " was somber, still personally angry over Hoover 's defeat in general election previous November; Hoover 's refused to crack smile at all during ride among crowd, despite Hoover 's urging to contrary."
+            }
+          ]
+        },
+        {
+          "name": " rain",
+          "children": [
+            {
+              "name": " At very moment, stopped and sun began to shine directly on platform, and present would later claim it was as though God himself was shining down on Roosevelt and American people in moment -LRB- Figure 26.4 -RRB-."
+            }
+          ]
+        },
+        {
+          "name": " Any man who can talk in times",
+          "children": [
+            {
+              "name": " like like is worth every ounce of support true American has."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+} };
+
+  var root = tree(d3.hierarchy(data));
+
+  var color = ['blue','green','orange','blue', 'red', 'purple', 'pink'];
+
+  var count = 0;
+
+  var link = g.selectAll(".link")
+    .data(root.links())
+    .enter().append("path")
+      .attr("class", "link")
+      .style("stroke-width", "5")
+      .attr("d", d3.linkRadial()
+          .angle(function(d) { return d.x; })
+          .radius(function(d) { return d.y; }))
+          .attr("stroke", function (d) { 
+              if (!d.source) {
+                return color[count];
+              } else if (d.source === root) {
+                count = count + 1;
+                d.source.children[count-1].height = count;
+                return color[count];
+              } else {
+                console.log(d.source);
+                for(let i = 0; i < d.source.children.length; i++){
+                  d.source.children[i].height = d.source.height;
+                }
+                return color[d.source.height];
+              }
+          });
+
+  var node = g.selectAll(".node")
+    .data(root.descendants())
+    .enter().append("g")
+      .attr("class", function(d) { return "node" + (d.children ? " node--internal" : " node--leaf"); })
+      .attr("transform", function(d) { return "translate(" + radialPoint(d.x, d.y) + ")"; });
+
+  node.append("circle")
+      .attr("r", 2);
+
+  node.append("foreignObject")
+      .attr("y", -22)
+      .attr("x", function(d) { return d.x < Math.PI || d.children? 2 : -260; })
+      .attr("text-anchor", function(d) { return d.x < Math.PI === !d.children ? "start" : "end"; })
+      .attr("width", function(d) { return d.depth < 3? 120 : 360;})
+      .attr("height", 130)
+      .append("xhtml:body")
+      .append("p")
+      .text(function(d) { return d.data.name });
+ 
+
+function radialPoint(x, y) {
+  return [(y = +y) * Math.cos(x -= Math.PI / 2), y * Math.sin(x)];
+}
+
+
+
+</script>
+</body>
+</html>
