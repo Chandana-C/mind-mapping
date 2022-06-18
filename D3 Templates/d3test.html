@@ -42,151 +42,68 @@ var tree = d3.tree()
     .size([2 * Math.PI, 350])
     .separation(function(a, b) { return (a.parent == b.parent ? 1 : 2) / a.depth; });
 //<!-- put JSON in this variable //-->
-var data = {{
-  "name": "26.1 The Rise of Franklin Roosevelt",
+
+var data = {
+  "name": "Machine Learning",
   "children": [
     {
-      "name": "THE ELECTION OF FRANKLIN ROOSEVELT",
+      "name": "INTRO",
       "children": [
         {
-          "name": " Hoover 's popularity",
+          "name": " The term Machine Learning",
           "children": [
             {
-              "name": " By 1932 presidential election, was at all-time low."
+              "name": " was coined by Arthur Samuel 1959, American pioneer in field of computer gaming and artificial intelligence, and stated `` it gives computers ability to learn without being explicitly programmed ''."
             }
           ]
         },
         {
-          "name": " Franklin Roosevelt",
+          "name": " perceptron",
           "children": [
             {
-              "name": ", though born to wealth and educated at best schools, offered change people sought."
+              "name": " was initially planned as machine, not program."
+            }
+          ]
+        },
+        {
+          "name": " Machine Learning",
+          "children": [
+            {
+              "name": " is latest buzzword floating around."
             },
             {
-              "name": " However, never wanted to be photographed in Franklin Roosevelt wheelchair or appear infirm in any way, for fear the public 's sympathy would transform into concern over Franklin Roosevelt physical ability to discharge duties of Oval Office."
-            },
-            {
-              "name": " also recognized need to convey to voting public Franklin Roosevelt was not simply another member of political aristocracy."
-            },
-            {
-              "name": " Often, seemed as though Franklin Roosevelt would faint, and aide constantly remained nearby with chair in case Franklin Roosevelt fell."
-            },
-            {
-              "name": " In contrast, thrived on campaign."
+              "name": " deserves to, as Machine Learning is one of most interesting subfields of Computer Science."
             }
           ]
         },
         {
-          "name": " Hoover",
+          "name": " you",
           "children": [
             {
-              "name": " assumed at first Franklin Roosevelt would be easy to defeat, confident Franklin Roosevelt could never carry eastern states and business vote."
+              "name": " After first attempt, realize you have put too much force into first attempt."
             }
           ]
         },
         {
-          "name": " Many news accounts",
+          "name": " What",
           "children": [
             {
-              "name": " reported Franklin Roosevelt seemed physically unwell, with ashen face and shaking hands."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "THE INTERREGNUM",
-      "children": [
-        {
-          "name": " country -- and Hoover --",
-          "children": [
-            {
-              "name": " After landslide election, had to endure interregnum, difficult four months between election and President Roosevelt Congress did not pass single significant piece of legislation during period, although Hoover spent much of time trying to get President Roosevelt to commit publicly to legislative agenda of Hoover 's choosing."
+              "name": " is happening here is basically after every throw we are learning something and improving result."
             }
           ]
         },
         {
-          "name": " Hoover 's inability to further drive",
+          "name": " This",
           "children": [
             {
-              "name": " legislative agenda through Congress."
-            }
-          ]
-        },
-        {
-          "name": " President Roosevelt and President Roosevelt driver",
-          "children": [
-            {
-              "name": " immediately rushed Cermak to hospital where Cermak died 19 days later."
-            }
-          ]
-        },
-        {
-          "name": " how to take action on beliefs",
-          "children": [
-            {
-              "name": " But was more in question."
-            }
-          ]
-        },
-        {
-          "name": " we",
-          "children": [
-            {
-              "name": " Save people and nation, and if have to change we minds twice every day to accomplish end, we should do end."
-            }
-          ]
-        },
-        {
-          "name": " Adolph Berle",
-          "children": [
-            {
-              "name": " was mediating influence, who often advised against centrally controlled economy, but did see role the federal government could play in mediating stark cycles of prosperity and depression, if left unchecked, could result in very situation in which country 's presently found country 's."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "INAUGURATION DAY: A NEW BEGINNING",
-      "children": [
-        {
-          "name": " Roosevelt",
-          "children": [
-            {
-              "name": " rode in open car along with outgoing president Hoover, facing public, as Roosevelt made Roosevelt way to U.S. Capitol."
-            }
-          ]
-        },
-        {
-          "name": " Hoover 's mood",
-          "children": [
-            {
-              "name": " was somber, still personally angry over Hoover 's defeat in general election previous November; Hoover 's refused to crack smile at all during ride among crowd, despite Hoover 's urging to contrary."
-            }
-          ]
-        },
-        {
-          "name": " rain",
-          "children": [
-            {
-              "name": " At very moment, stopped and sun began to shine directly on platform, and present would later claim it was as though God himself was shining down on Roosevelt and American people in moment -LRB- Figure 26.4 -RRB-."
-            }
-          ]
-        },
-        {
-          "name": " Any man who can talk in times",
-          "children": [
-            {
-              "name": " like like is worth every ounce of support true American has."
+              "name": " follows follows Alan Alan Turing Turing 's 's proposal proposal in in Alan Alan Turing Turing 's 's paper paper `` `` Computing Computing Machinery Machinery and and Intelligence Intelligence '' '',, in in which question `` Can machines think ? ''"
             }
           ]
         }
       ]
     }
   ]
-} };
-
+};
   var root = tree(d3.hierarchy(data));
 
   var color = ['blue','green','orange','blue', 'red', 'purple', 'pink'];

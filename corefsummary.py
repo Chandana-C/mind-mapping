@@ -6,15 +6,13 @@
 # This program takes a section from the U.S. History textbook and applies coreference resolution,
 # automatic summarization and dependency parsing, resulting in a JSON file used for data visualization
 
-#import spacy
-#import neuralcoref
+import spacy
+import neuralcoref
 from summarizer import Summarizer
 from summarizer.text_processors.coreference_handler import CoreferenceHandler
 from stanfordcorenlp import StanfordCoreNLP
 import nltk.data
 import json
-
-
 
 # takes the text summary and returns the noun phrase with the subject and the verb phrase with the subject
 def get_noun_verb_phrases(summary):
@@ -121,11 +119,11 @@ def get_noun_verb_phrases(summary):
 #neuralcoref.add_to_pipe(nlp, greedyness=0.5)
 
 # change to look at whatever section you want
-with open("section4.txt", 'r') as myfile:
+with open("/home/chandana/Frontend/MM_Upload/media/data.txt", 'r') as myfile:
     text = myfile.read()
+    
 
 lines = text.split("\n")
-
 subsectionCount = -1    # Number of subsections in text
 subsectionTitle = []    # Title of every subsection
 subsectionText = []     # Text of the subsection
@@ -144,7 +142,7 @@ for i in range(len(lines)):
         continue
     else:
         subsectionText[subsectionCount]+= " " + lines[i]
-
+print(subsectionCount)
 # Set up coreference resolution and BERT summarizer
 handler = CoreferenceHandler(greedyness=0.5)
 subsectionSummaries = []
@@ -196,7 +194,7 @@ for i in range(len(phrases)):
     subject_list = []
 
 
-with open("section4JSON.json", "w") as wf:
+with open("data.json", "w") as wf:
     json.dump(final, wf, indent = 2)
 
 
